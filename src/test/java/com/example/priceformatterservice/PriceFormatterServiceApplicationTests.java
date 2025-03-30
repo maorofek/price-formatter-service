@@ -56,4 +56,20 @@ class PriceFormatterServiceApplicationTests {
         assertEquals(new BigDecimal("8.30"), response.getNetValue());
         assertEquals(BigDecimal.valueOf(1.58), response.getVatAmount());
     }
+
+    @Test
+    void testFormatPriceBigAmountUSD() {
+        PriceRequest request = new PriceRequest(123456789, Currency.USD);
+        PriceResponse response = controller.formatPrice(request);
+        assertNotNull(response);
+
+        assertEquals(new BigDecimal("1234567.89"), response.getValue());
+        assertEquals("1,234,567.89$", response.getValueWithCurrency());
+        assertEquals("1,234,567.89", response.getValueWithoutCurrency());
+
+        assertEquals(new BigDecimal("1037452.01"), response.getNetValue());
+
+        assertEquals(new BigDecimal("197115.88"), response.getVatAmount());
+    }
+
 }
