@@ -23,7 +23,7 @@ public class PriceFormatterService {
                 .toList();
     }
 
-    public PriceResponse formatPrice(String amountStr, Currency currency) {
+    public PriceResponse formatPrice(Integer amountStr, Currency currency) {
         BigDecimal fullPrice = new BigDecimal(amountStr).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
         BigDecimal net = fullPrice.divide(VAT_RATE, 2, RoundingMode.HALF_UP);
         BigDecimal vat = fullPrice.subtract(net).setScale(2, RoundingMode.HALF_UP);
